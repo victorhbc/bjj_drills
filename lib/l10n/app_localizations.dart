@@ -541,6 +541,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total Time'**
   String get totalTime;
+
+  /// No description provided for @voiceAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice Announcements'**
+  String get voiceAnnouncements;
+
+  /// No description provided for @enableVoiceAnnouncements.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable voice announcements for drill names during training'**
+  String get enableVoiceAnnouncements;
+
+  /// No description provided for @voiceAnnouncementsEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice announcements enabled'**
+  String get voiceAnnouncementsEnabled;
+
+  /// No description provided for @voiceAnnouncementsDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice announcements disabled'**
+  String get voiceAnnouncementsDisabled;
+
+  /// No description provided for @drillNamesWillBeSpoken.
+  ///
+  /// In en, this message translates to:
+  /// **'Drill names will be spoken during training'**
+  String get drillNamesWillBeSpoken;
+
+  /// No description provided for @onlyVisualDrillCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Only visual drill cards will be shown'**
+  String get onlyVisualDrillCards;
 }
 
 class _AppLocalizationsDelegate

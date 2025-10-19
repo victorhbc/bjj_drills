@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/language_provider.dart';
+import '../services/tts_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -11,6 +12,22 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final TTSService _ttsService = TTSService();
+  bool _ttsEnabled = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTTSSettings();
+  }
+
+  Future<void> _loadTTSSettings() async {
+    await _ttsService.initialize();
+    setState(() {
+      _ttsEnabled = _ttsService.isEnabled;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -67,6 +84,73 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       l10n.portuguese,
                       'pt',
                       Icons.flag,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            
+            const SizedBox(height: 24),
+            
+            // TTS Settings Section
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.volume_up,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          l10n.voiceAnnouncements,
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      l10n.enableVoiceAnnouncements,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SwitchListTile(
+                      title: Text(
+                        _ttsEnabled ? l10n.voiceAnnouncementsEnabled : l10n.voiceAnnouncementsDisabled,
+                        style: TextStyle(
+                          color: _ttsEnabled 
+                              ? Theme.of(context).colorScheme.primary
+                              : Colors.grey[600],
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      subtitle: Text(
+                        _ttsEnabled 
+                            ? l10n.drillNamesWillBeSpoken
+                            : l10n.onlyVisualDrillCards,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      value: _ttsEnabled,
+                      onChanged: (value) async {
+                        setState(() {
+                          _ttsEnabled = value;
+                        });
+                        await _ttsService.setEnabled(value);
+                        
+                        // Test TTS if enabling
+                        if (value) {
+                          _ttsService.speak('Voice announcements enabled');
+                        }
+                      },
+                      activeThumbColor: Theme.of(context).colorScheme.primary,
                     ),
                   ],
                 ),

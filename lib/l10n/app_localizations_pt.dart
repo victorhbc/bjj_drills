@@ -252,4 +252,25 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get totalTime => 'Tempo Total';
+
+  @override
+  String get voiceAnnouncements => 'Anúncios por Voz';
+
+  @override
+  String get enableVoiceAnnouncements =>
+      'Habilitar anúncios por voz para nomes de exercícios durante o treino';
+
+  @override
+  String get voiceAnnouncementsEnabled => 'Anúncios por voz habilitados';
+
+  @override
+  String get voiceAnnouncementsDisabled => 'Anúncios por voz desabilitados';
+
+  @override
+  String get drillNamesWillBeSpoken =>
+      'Nomes dos exercícios serão falados durante o treino';
+
+  @override
+  String get onlyVisualDrillCards =>
+      'Apenas cartões visuais dos exercícios serão mostrados';
 }

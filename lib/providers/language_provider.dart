@@ -43,3 +43,4 @@ class LanguageProvider extends ChangeNotifier {
     await changeLanguage('pt');
   }
 }
+

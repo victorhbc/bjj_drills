@@ -262,5 +262,11 @@
   },
   "drillAddedToFavorites": "Drill added to favorites! ⭐",
   "min": "min",
-  "totalTime": "Total Time"
+  "totalTime": "Total Time",
+  "voiceAnnouncements": "Voice Announcements",
+  "enableVoiceAnnouncements": "Enable voice announcements for drill names during training",
+  "voiceAnnouncementsEnabled": "Voice announcements enabled",
+  "voiceAnnouncementsDisabled": "Voice announcements disabled",
+  "drillNamesWillBeSpoken": "Drill names will be spoken during training",
+  "onlyVisualDrillCards": "Only visual drill cards will be shown"
 }

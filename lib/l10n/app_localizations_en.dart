@@ -248,4 +248,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get totalTime => 'Total Time';
+
+  @override
+  String get voiceAnnouncements => 'Voice Announcements';
+
+  @override
+  String get enableVoiceAnnouncements =>
+      'Enable voice announcements for drill names during training';
+
+  @override
+  String get voiceAnnouncementsEnabled => 'Voice announcements enabled';
+
+  @override
+  String get voiceAnnouncementsDisabled => 'Voice announcements disabled';
+
+  @override
+  String get drillNamesWillBeSpoken =>
+      'Drill names will be spoken during training';
+
+  @override
+  String get onlyVisualDrillCards => 'Only visual drill cards will be shown';
 }

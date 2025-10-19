@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../l10n/app_localizations.dart';
 import '../models/drill.dart';
 import 'fast_training_screen.dart';
 
@@ -26,15 +25,14 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final totalTime = _intervalMinutes * 60 + _intervalSeconds;
     final totalDrills = widget.selectedDrills.length;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          l10n.timerConfiguration,
-          style: const TextStyle(
+        title: const Text(
+          'Timer Configuration',
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -63,14 +61,14 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            l10n.fastTrainingSetup,
+                            'Fast Training Setup',
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                           Text(
-                            l10n.drillsSelected(totalDrills),
+                            '$totalDrills drills selected',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                             ),
@@ -95,13 +93,13 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
                     children: [
                       _InfoItem(
                         icon: Icons.timer,
-                        label: l10n.interval,
+                        label: 'Interval',
                         value: '${_intervalMinutes}m ${_intervalSeconds}s',
                         color: Theme.of(context).colorScheme.primary,
                       ),
                       _InfoItem(
                         icon: Icons.repeat,
-                        label: l10n.totalTime,
+                        label: 'Total Time',
                         value: _calculateTotalTime(),
                         color: Theme.of(context).colorScheme.secondary,
                       ),
@@ -120,13 +118,13 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
                 children: [
                   // Time interval selection
                   _SectionCard(
-                    title: l10n.timeInterval,
-                    subtitle: l10n.howLongBetweenEachDrill,
+                    title: 'Time Interval',
+                    subtitle: 'How long between each drill announcement',
                     child: Column(
                       children: [
                         // Minutes selection
                         Text(
-                          l10n.minutes,
+                          'Minutes:',
                           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -154,7 +152,7 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
                         
                         // Seconds selection
                         Text(
-                          l10n.seconds,
+                          'Seconds:',
                           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
@@ -185,13 +183,13 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
 
                   // Training options
                   _SectionCard(
-                    title: l10n.trainingOptions,
-                    subtitle: l10n.customizeYourTrainingExperience,
+                    title: 'Training Options',
+                    subtitle: 'Customize your training experience',
                     child: Column(
                       children: [
                         _OptionSwitch(
-                          title: l10n.randomOrder,
-                          subtitle: l10n.announceDrillsInRandomOrder,
+                          title: 'Random Order',
+                          subtitle: 'Announce drills in random order',
                           value: _randomOrder,
                           onChanged: (value) {
                             setState(() {
@@ -202,8 +200,8 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
                         ),
                         const Divider(),
                         _OptionSwitch(
-                          title: l10n.repeatDrills,
-                          subtitle: l10n.allowDrillsToBeRepeated,
+                          title: 'Repeat Drills',
+                          subtitle: 'Allow drills to be repeated during training',
                           value: _repeatDrills,
                           onChanged: (value) {
                             setState(() {
@@ -220,8 +218,8 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
 
                   // Selected drills preview
                   _SectionCard(
-                    title: l10n.selectedDrills,
-                    subtitle: l10n.drillsThatWillBeAnnounced,
+                    title: 'Selected Drills',
+                    subtitle: 'Drills that will be announced during training',
                     child: Column(
                       children: widget.selectedDrills.take(5).map((drill) {
                         return Padding(
@@ -266,7 +264,7 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
                     Padding(
                       padding: const EdgeInsets.only(top: 8),
                       child: Text(
-                        l10n.andMoreDrills(widget.selectedDrills.length - 5),
+                        '... and ${widget.selectedDrills.length - 5} more drills',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Colors.grey[600],
                           fontStyle: FontStyle.italic,
@@ -298,7 +296,7 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
                   );
                 },
                 icon: const Icon(Icons.play_arrow),
-                label: Text(l10n.startFastTraining),
+                label: const Text('Start Fast Training'),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   textStyle: const TextStyle(

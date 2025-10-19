@@ -97,5 +97,11 @@
   },
   "drillAddedToFavorites": "Exercício adicionado aos favoritos! ⭐",
   "min": "min",
-  "totalTime": "Tempo Total"
+  "totalTime": "Tempo Total",
+  "voiceAnnouncements": "Anúncios por Voz",
+  "enableVoiceAnnouncements": "Habilitar anúncios por voz para nomes de exercícios durante o treino",
+  "voiceAnnouncementsEnabled": "Anúncios por voz habilitados",
+  "voiceAnnouncementsDisabled": "Anúncios por voz desabilitados",
+  "drillNamesWillBeSpoken": "Nomes dos exercícios serão falados durante o treino",
+  "onlyVisualDrillCards": "Apenas cartões visuais dos exercícios serão mostrados"
 }

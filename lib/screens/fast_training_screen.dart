@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../models/drill.dart';
+import '../services/tts_service.dart';
 
 class FastTrainingScreen extends StatefulWidget {
   final List<Drill> selectedDrills;
@@ -38,6 +39,9 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
   late AnimationController _slideController;
   late Animation<double> _pulseAnimation;
   late Animation<Offset> _slideAnimation;
+  
+  // TTS service
+  final TTSService _ttsService = TTSService();
 
   @override
   void initState() {
@@ -45,6 +49,11 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
     _setupAnimations();
     _setupDrillQueue();
     _timeRemaining = widget.intervalSeconds;
+    _initializeTTS();
+  }
+
+  Future<void> _initializeTTS() async {
+    await _ttsService.initialize();
   }
 
   void _setupAnimations() {
@@ -144,6 +153,11 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
 
     _currentDrill = _drillQueue.removeAt(0);
     _totalDrillsAnnounced++;
+    
+    // Announce drill name using TTS
+    if (_currentDrill != null) {
+      _ttsService.speak(_currentDrill!.name);
+    }
     
     setState(() {
       _currentDrillIndex = (_currentDrillIndex + 1) % widget.selectedDrills.length;
@@ -309,6 +323,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
     _timer?.cancel();
     _pulseController.dispose();
     _slideController.dispose();
+    _ttsService.dispose();
     super.dispose();
   }
 
@@ -615,3 +630,4 @@ class _InfoItem extends StatelessWidget {
     );
   }
 }
+
