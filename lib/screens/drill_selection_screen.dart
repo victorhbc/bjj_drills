@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../l10n/app_localizations.dart';
 import '../models/drill.dart';
 import '../data/takedown_drills.dart';
+import '../providers/language_provider.dart';
 import 'timer_configuration_screen.dart';
 
 class DrillSelectionScreen extends StatefulWidget {
@@ -15,18 +18,34 @@ class _DrillSelectionScreenState extends State<DrillSelectionScreen> {
   String _selectedDifficulty = 'All';
 
   final List<String> _difficultyLevels = ['All', 'Beginner', 'Intermediate', 'Advanced'];
+  
+  String _getTranslatedDifficulty(String difficulty, AppLocalizations l10n) {
+    switch (difficulty) {
+      case 'All':
+        return l10n.all;
+      case 'Beginner':
+        return l10n.beginner;
+      case 'Intermediate':
+        return l10n.intermediate;
+      case 'Advanced':
+        return l10n.advanced;
+      default:
+        return difficulty;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     List<Drill> filteredDrills = _selectedDifficulty == 'All'
         ? TakedownDrills.drills
         : TakedownDrills.getDrillsByDifficulty(_selectedDifficulty);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Select Drills for Fast Training',
-          style: TextStyle(
+        title: Text(
+          l10n.selectDrillsForFastTraining,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -41,7 +60,7 @@ class _DrillSelectionScreenState extends State<DrillSelectionScreen> {
                   _selectedDrillIds.clear();
                 });
               },
-              child: const Text('Clear All'),
+              child: Text(l10n.clearAll),
             ),
         ],
       ),
@@ -64,14 +83,14 @@ class _DrillSelectionScreenState extends State<DrillSelectionScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Fast Training Setup',
+                        l10n.fastTrainingSetup,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.primary,
                         ),
                       ),
                       Text(
-                        '${_selectedDrillIds.length} drills selected',
+                        l10n.drillsSelected(_selectedDrillIds.length),
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                         ),
@@ -105,7 +124,7 @@ class _DrillSelectionScreenState extends State<DrillSelectionScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Filter by Difficulty:',
+                  l10n.filterByDifficulty,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.primary,
@@ -120,7 +139,7 @@ class _DrillSelectionScreenState extends State<DrillSelectionScreen> {
                       return Padding(
                         padding: const EdgeInsets.only(right: 8),
                         child: FilterChip(
-                          label: Text(difficulty),
+                          label: Text(_getTranslatedDifficulty(difficulty, l10n)),
                           selected: isSelected,
                           onSelected: (selected) {
                             setState(() {
@@ -190,7 +209,7 @@ class _DrillSelectionScreenState extends State<DrillSelectionScreen> {
                     );
                   },
                   icon: const Icon(Icons.timer),
-                  label: const Text('Continue to Timer Setup'),
+                  label: Text(l10n.continueToTimerSetup),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     textStyle: const TextStyle(
@@ -220,6 +239,10 @@ class _DrillSelectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final languageProvider = Provider.of<LanguageProvider>(context);
+    final currentLanguage = languageProvider.currentLanguageCode;
+    
     Color difficultyColor;
     IconData difficultyIcon;
     
@@ -239,6 +262,19 @@ class _DrillSelectionCard extends StatelessWidget {
       default:
         difficultyColor = Colors.grey;
         difficultyIcon = Icons.star;
+    }
+    
+    String getTranslatedDifficulty(String difficulty) {
+      switch (difficulty) {
+        case 'Beginner':
+          return l10n.beginner;
+        case 'Intermediate':
+          return l10n.intermediate;
+        case 'Advanced':
+          return l10n.advanced;
+        default:
+          return difficulty;
+      }
     }
 
     return Card(
@@ -322,7 +358,7 @@ class _DrillSelectionCard extends StatelessWidget {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                drill.difficulty,
+                                getTranslatedDifficulty(drill.difficulty),
                                 style: TextStyle(
                                   color: difficultyColor,
                                   fontWeight: FontWeight.bold,
@@ -336,7 +372,7 @@ class _DrillSelectionCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      drill.description,
+                      drill.getTranslatedDescription(currentLanguage),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Colors.grey[600],
                       ),
@@ -353,7 +389,7 @@ class _DrillSelectionCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '${drill.estimatedTime} min',
+                          '${drill.estimatedTime} ${l10n.min}',
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.w500,

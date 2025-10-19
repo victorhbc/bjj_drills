@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../models/drill.dart';
 
 class FastTrainingScreen extends StatefulWidget {
@@ -160,11 +161,13 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
   }
 
   void _showTrainingCompleteDialog() {
+    final l10n = AppLocalizations.of(context)!;
+    
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (context) => AlertDialog(
-        title: const Text('Training Complete!'),
+        title: Text(l10n.trainingComplete),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -174,12 +177,12 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
               size: 48,
             ),
             const SizedBox(height: 16),
-            Text('You completed $_totalDrillsAnnounced drills!'),
+            Text(l10n.completedDrills(_totalDrillsAnnounced)),
             if (widget.repeatDrills && _currentRound > 1)
-              Text('Completed $_currentRound rounds'),
+              Text(l10n.completedRounds(_currentRound)),
             const SizedBox(height: 8),
             Text(
-              'Great job on your BJJ training session! 🥋',
+              l10n.greatJob,
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
@@ -191,7 +194,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
               Navigator.of(context).pop();
               Navigator.of(context).pop();
             },
-            child: const Text('Finish'),
+            child: Text(l10n.finish),
           ),
         ],
       ),
@@ -205,6 +208,8 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
   }
 
   Widget _buildDrillCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
@@ -234,7 +239,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
           ),
           const SizedBox(height: 16),
           Text(
-            _currentDrill?.name ?? 'Ready to Start Training',
+            _currentDrill?.name ?? l10n.readyToStartTraining,
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: _currentDrill != null 
@@ -245,7 +250,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
           ),
           const SizedBox(height: 8),
           Text(
-            _currentDrill?.description ?? 'Tap Start to begin your BJJ drill session',
+            _currentDrill?.description ?? l10n.tapStartToBegin,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: Colors.grey[600],
             ),
@@ -285,7 +290,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
                 ),
               ),
               child: Text(
-                '${widget.selectedDrills.length} Drills Selected',
+                l10n.drillsSelected(widget.selectedDrills.length),
                 style: TextStyle(
                   color: Colors.blue,
                   fontWeight: FontWeight.bold,
@@ -309,11 +314,13 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Fast Training',
-          style: TextStyle(
+        title: Text(
+          l10n.fastTraining,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -341,19 +348,19 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
                   children: [
                     _StatCard(
                       icon: Icons.sports_martial_arts,
-                      label: 'Drills Done',
+                      label: l10n.drillsDone,
                       value: '$_totalDrillsAnnounced',
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     _StatCard(
                       icon: Icons.timer,
-                      label: 'Next in',
+                      label: l10n.nextIn,
                       value: _formatTime(_timeRemaining),
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                     _StatCard(
                       icon: Icons.list,
-                      label: 'Remaining',
+                      label: l10n.remaining,
                       value: '${_drillQueue.length}',
                       color: Colors.orange,
                     ),
@@ -368,7 +375,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
-                      'Round $_currentRound',
+                      l10n.round(_currentRound),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSecondaryContainer,
                         fontWeight: FontWeight.bold,
@@ -409,7 +416,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
                       ElevatedButton.icon(
                         onPressed: _isRunning ? _pauseTraining : (_timeRemaining < widget.intervalSeconds ? _resumeTraining : _startTraining),
                         icon: Icon(_isRunning ? Icons.pause : (_timeRemaining < widget.intervalSeconds ? Icons.play_arrow : Icons.play_arrow)),
-                        label: Text(_isRunning ? 'Pause' : (_timeRemaining < widget.intervalSeconds ? 'Resume' : 'Start')),
+                        label: Text(_isRunning ? l10n.pause : (_timeRemaining < widget.intervalSeconds ? l10n.resume : l10n.start)),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                           backgroundColor: _isRunning ? Colors.orange : Colors.green,
@@ -425,7 +432,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
                       ElevatedButton.icon(
                         onPressed: _stopTraining,
                         icon: const Icon(Icons.stop),
-                        label: const Text('Stop'),
+                        label: Text(l10n.stop),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                           backgroundColor: Colors.red,
@@ -444,7 +451,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
                   // Progress indicator
                   if (_isRunning) ...[
                     Text(
-                      'Training in progress...',
+                      l10n.trainingInProgress,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.grey[600],
                       ),
@@ -459,7 +466,7 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
                     ),
                   ] else if (_timeRemaining < widget.intervalSeconds) ...[
                     Text(
-                      'Training paused',
+                      l10n.trainingPaused,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.orange[600],
                       ),
@@ -487,18 +494,18 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
               children: [
                 _InfoItem(
                   icon: Icons.settings,
-                  label: 'Interval',
+                  label: l10n.interval,
                   value: _formatTime(widget.intervalSeconds),
                 ),
                 _InfoItem(
                   icon: Icons.shuffle,
-                  label: 'Order',
-                  value: widget.randomOrder ? 'Random' : 'Sequential',
+                  label: l10n.order,
+                  value: widget.randomOrder ? l10n.random : l10n.sequential,
                 ),
                 _InfoItem(
                   icon: Icons.repeat,
-                  label: 'Repeat',
-                  value: widget.repeatDrills ? 'Yes' : 'No',
+                  label: l10n.repeat,
+                  value: widget.repeatDrills ? l10n.yes : l10n.no,
                 ),
               ],
             ),
@@ -509,12 +516,17 @@ class _FastTrainingScreenState extends State<FastTrainingScreen>
   }
 
   Color _getDifficultyColor(String difficulty) {
-    switch (difficulty) {
-      case 'Beginner':
+    // Note: This method should ideally receive localized difficulty strings
+    // For now, we'll check against both English and Portuguese
+    switch (difficulty.toLowerCase()) {
+      case 'beginner':
+      case 'iniciante':
         return Colors.green;
-      case 'Intermediate':
+      case 'intermediate':
+      case 'intermediário':
         return Colors.orange;
-      case 'Advanced':
+      case 'advanced':
+      case 'avançado':
         return Colors.red;
       default:
         return Colors.grey;

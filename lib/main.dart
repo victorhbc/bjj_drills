@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'l10n/app_localizations.dart';
+import 'providers/language_provider.dart';
 import 'screens/drills_list_screen.dart';
+import 'screens/settings_screen.dart';
 
 void main() {
-  runApp(const BJJDrillsApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => LanguageProvider(),
+      child: const BJJDrillsApp(),
+    ),
+  );
 }
 
 class BJJDrillsApp extends StatelessWidget {
@@ -10,20 +20,35 @@ class BJJDrillsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'BJJ Drills',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF8B4513), // Brown color for BJJ theme
-          brightness: Brightness.light,
-        ),
-        useMaterial3: true,
-        appBarTheme: const AppBarTheme(
-          centerTitle: true,
-          elevation: 2,
-        ),
-      ),
-      home: const MainTabScreen(),
+    return Consumer<LanguageProvider>(
+      builder: (context, languageProvider, child) {
+        return MaterialApp(
+          title: 'BJJ Drills',
+          locale: languageProvider.currentLocale,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''), // English
+            Locale('pt', ''), // Portuguese
+          ],
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color(0xFF8B4513), // Brown color for BJJ theme
+              brightness: Brightness.light,
+            ),
+            useMaterial3: true,
+            appBarTheme: const AppBarTheme(
+              centerTitle: true,
+              elevation: 2,
+            ),
+          ),
+          home: const MainTabScreen(),
+        );
+      },
     );
   }
 }
@@ -41,6 +66,7 @@ class _MainTabScreenState extends State<MainTabScreen> {
   final List<Widget> _screens = [
     const BJJDrillsHomePage(),
     const DrillsListScreen(),
+    const SettingsScreen(),
   ];
 
   @override
@@ -59,14 +85,18 @@ class _MainTabScreenState extends State<MainTabScreen> {
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.grey[600],
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.home),
+            label: AppLocalizations.of(context)!.home,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Drills List',
+            icon: const Icon(Icons.list),
+            label: AppLocalizations.of(context)!.drillsList,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.settings),
+            label: AppLocalizations.of(context)!.settings,
           ),
         ],
       ),
@@ -79,11 +109,13 @@ class BJJDrillsHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'BJJ Drills',
-          style: TextStyle(
+        title: Text(
+          l10n.appTitle,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
@@ -121,7 +153,7 @@ class BJJDrillsHomePage extends StatelessWidget {
               
               // Welcome message
               Text(
-                'Welcome to BJJ Drills!',
+                l10n.welcomeTitle,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).colorScheme.primary,
@@ -131,7 +163,7 @@ class BJJDrillsHomePage extends StatelessWidget {
               const SizedBox(height: 16),
               
               Text(
-                'Your Brazilian Jiu-Jitsu training companion',
+                l10n.welcomeSubtitle,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Colors.grey[600],
                 ),
@@ -159,7 +191,7 @@ class BJJDrillsHomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'Hello World!',
+                      l10n.helloWorld,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.primary,
@@ -167,7 +199,7 @@ class BJJDrillsHomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Ready to start your BJJ journey?',
+                      l10n.readyToStart,
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -180,14 +212,14 @@ class BJJDrillsHomePage extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Welcome to BJJ Drills! 🥋'),
-                      duration: Duration(seconds: 2),
+                    SnackBar(
+                      content: Text(l10n.welcomeMessage),
+                      duration: const Duration(seconds: 2),
                     ),
                   );
                 },
                 icon: const Icon(Icons.play_arrow),
-                label: const Text('Get Started'),
+                label: Text(l10n.getStarted),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 32,
@@ -207,14 +239,14 @@ class BJJDrillsHomePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Check out the Drills List tab! 🥋'),
-              duration: Duration(seconds: 2),
+            SnackBar(
+              content: Text(l10n.checkDrillsList),
+              duration: const Duration(seconds: 2),
             ),
           );
         },
         icon: const Icon(Icons.sports_martial_arts),
-        label: const Text('Drills'),
+        label: Text(l10n.drillsList),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),

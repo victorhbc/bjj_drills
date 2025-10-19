@@ -16,6 +16,16 @@ class TakedownDrills {
         'Lift and drive them to the ground',
         'Maintain control and transition to ground position'
       ],
+      descriptionPt: 'Uma queda fundamental onde você agarra uma perna e avança para derrubar seu oponente.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Iniciante',
+      stepsPt: [
+        'Configure com uma pegada no colarinho ou gancho por baixo',
+        'Entre e agarre a perna do oponente no joelho',
+        'Avance com seu ombro contra o quadril dele',
+        'Levante e empurre-o ao chão',
+        'Mantenha o controle e transicione para posição no chão'
+      ],
     ),
     Drill(
       id: 'double_leg_takedown',
@@ -32,6 +42,17 @@ class TakedownDrills {
         'Lift and drive them to the ground',
         'Secure top position'
       ],
+      descriptionPt: 'Uma queda poderosa que envolve agarrar ambas as pernas e avançar através do oponente.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Iniciante',
+      stepsPt: [
+        'Configure com postura e distância adequadas',
+        'Entre com a cabeça erguida e costas retas',
+        'Agarre ambas as pernas nos joelhos',
+        'Avance com seu ombro contra o quadril dele',
+        'Levante e empurre-o ao chão',
+        'Garanta a posição superior'
+      ],
     ),
     Drill(
       id: 'hip_toss',
@@ -46,6 +67,16 @@ class TakedownDrills {
         'Pull down on the collar while lifting with the underhook',
         'Use your hip as a fulcrum to throw them over',
         'Follow them to the ground and secure position'
+      ],
+      descriptionPt: 'Um arremesso clássico do judô adaptado para o BJJ, usando seu quadril como ponto de apoio para arremessar o oponente.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Intermediário',
+      stepsPt: [
+        'Obtenha uma pegada no colarinho e gancho por baixo',
+        'Entre próximo e vire seu quadril contra o quadril dele',
+        'Puxe para baixo no colarinho enquanto levanta com o gancho',
+        'Use seu quadril como ponto de apoio para arremessá-lo',
+        'Siga-o ao chão e garanta a posição'
       ],
     ),
     Drill(
@@ -62,6 +93,16 @@ class TakedownDrills {
         'Pull them in the direction of the sweep',
         'Follow them down and secure position'
       ],
+      descriptionPt: 'Uma varredura baseada em timing que pega o oponente desequilibrado.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Intermediário',
+      stepsPt: [
+        'Agarre o kimono ou corpo do oponente',
+        'Aguarde ele dar um passo à frente',
+        'Varra o pé dele com seu pé quando ele pisar',
+        'Puxe-o na direção da varredura',
+        'Siga-o ao chão e garanta a posição'
+      ],
     ),
     Drill(
       id: 'ankle_pick',
@@ -76,6 +117,16 @@ class TakedownDrills {
         'Quickly reach down and grab their ankle',
         'Pull the ankle up and push them backward',
         'Follow them down and secure position'
+      ],
+      descriptionPt: 'Uma queda rápida que mira no tornozelo quando o oponente está desequilibrado.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Iniciante',
+      stepsPt: [
+        'Configure com uma pegada no colarinho',
+        'Puxe para baixo no colarinho para desequilibrá-lo',
+        'Rapidamente alcance e agarre o tornozelo dele',
+        'Puxe o tornozelo para cima e empurre-o para trás',
+        'Siga-o ao chão e garanta a posição'
       ],
     ),
     Drill(
@@ -92,6 +143,16 @@ class TakedownDrills {
         'Drive them backward and down',
         'Secure top position'
       ],
+      descriptionPt: 'Uma queda simples mas eficaz que usa o joelho como alvo.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Iniciante',
+      stepsPt: [
+        'Obtenha uma pegada no colarinho e gancho por baixo',
+        'Entre e coloque sua mão no joelho dele',
+        'Empurre o joelho para baixo enquanto puxa para cima com o gancho',
+        'Empurre-o para trás e para baixo',
+        'Garanta a posição superior'
+      ],
     ),
     Drill(
       id: 'fireman_carry',
@@ -106,6 +167,16 @@ class TakedownDrills {
         'Lift them onto your shoulders',
         'Drive forward and throw them over',
         'Land in a dominant position'
+      ],
+      descriptionPt: 'Uma queda dinâmica que envolve levantar o oponente sobre seu ombro.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Avançado',
+      stepsPt: [
+        'Obtenha um gancho por baixo e controle o braço dele',
+        'Entre e mergulhe sob o braço dele',
+        'Levante-o sobre seus ombros',
+        'Avance e arremesse-o por cima',
+        'Aterrisse em uma posição dominante'
       ],
     ),
     Drill(
@@ -122,6 +193,16 @@ class TakedownDrills {
         'Use your body as a fulcrum',
         'Follow them down and secure position'
       ],
+      descriptionPt: 'Um arremesso poderoso que usa seu peso corporal para derrubar o oponente.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Intermediário',
+      stepsPt: [
+        'Obtenha uma pegada no colarinho e gancho por baixo',
+        'Entre e vire seu corpo perpendicular ao dele',
+        'Deixe seu peso cair e puxe-o sobre seu quadril',
+        'Use seu corpo como ponto de apoio',
+        'Siga-o ao chão e garanta a posição'
+      ],
     ),
     Drill(
       id: 'snap_down',
@@ -136,6 +217,16 @@ class TakedownDrills {
         'Step back to create distance',
         'Drive them down to their knees',
         'Transition to a front headlock or back control'
+      ],
+      descriptionPt: 'Uma queda rápida que usa um movimento súbito para baixo para levar o oponente aos joelhos.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Iniciante',
+      stepsPt: [
+        'Obtenha uma pegada no colarinho com ambas as mãos',
+        'Puxe para baixo bruscamente no colarinho',
+        'Dê um passo para trás para criar distância',
+        'Empurre-o para baixo até os joelhos',
+        'Transicione para uma chave de cabeça frontal ou controle das costas'
       ],
     ),
     Drill(
@@ -152,6 +243,16 @@ class TakedownDrills {
         'Secure back control or side control',
         'Transition to a dominant position'
       ],
+      descriptionPt: 'Uma técnica que usa o arrasto do braço para configurar várias quedas.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Intermediário',
+      stepsPt: [
+        'Agarre o pulso dele e puxe através do seu corpo',
+        'Entre e fique atrás dele',
+        'Use o momentum para derrubá-lo',
+        'Garanta controle das costas ou lateral',
+        'Transicione para uma posição dominante'
+      ],
     ),
     Drill(
       id: 'collar_drag',
@@ -166,6 +267,16 @@ class TakedownDrills {
         'Step in and use your body weight',
         'Drive them to the ground',
         'Secure top position'
+      ],
+      descriptionPt: 'Uma queda baseada no kimono que usa o colarinho para controlar e derrubar o oponente.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Iniciante',
+      stepsPt: [
+        'Agarre o colarinho com uma pegada forte',
+        'Puxe para baixo e através do seu corpo',
+        'Entre e use seu peso corporal',
+        'Empurre-o ao chão',
+        'Garanta a posição superior'
       ],
     ),
     Drill(
@@ -182,6 +293,16 @@ class TakedownDrills {
         'Throw them over your head',
         'Quickly get up and secure position'
       ],
+      descriptionPt: 'Uma técnica de sacrifício onde você cai para trás para arremessar o oponente sobre você.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Avançado',
+      stepsPt: [
+        'Obtenha uma pegada no colarinho e gancho por baixo',
+        'Entre e caia para trás',
+        'Use seu pé para levantá-lo sobre você',
+        'Arremesse-o sobre sua cabeça',
+        'Rapidamente levante-se e garanta a posição'
+      ],
     ),
     Drill(
       id: 'uchi_mata',
@@ -196,6 +317,16 @@ class TakedownDrills {
         'Lift with your leg on their inner thigh',
         'Pull down with the collar and lift with the underhook',
         'Throw them over your hip and follow them down'
+      ],
+      descriptionPt: 'Um arremesso poderoso do judô que usa a parte interna da coxa para arremessar o oponente.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Avançado',
+      stepsPt: [
+        'Obtenha uma pegada no colarinho e gancho por baixo',
+        'Entre e vire seu quadril contra o dele',
+        'Levante com sua perna na parte interna da coxa dele',
+        'Puxe para baixo com o colarinho e levante com o gancho',
+        'Arremesse-o sobre seu quadril e siga-o ao chão'
       ],
     ),
     Drill(
@@ -212,6 +343,16 @@ class TakedownDrills {
         'Pull them backward and down',
         'Follow them down and secure position'
       ],
+      descriptionPt: 'Uma ceifa poderosa da perna externa que varre a perna do oponente de baixo dele.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Intermediário',
+      stepsPt: [
+        'Obtenha uma pegada no colarinho e gancho por baixo',
+        'Entre e vire seu corpo',
+        'Ceife a perna dele com sua perna',
+        'Puxe-o para trás e para baixo',
+        'Siga-o ao chão e garanta a posição'
+      ],
     ),
     Drill(
       id: 'koshi_guruma',
@@ -226,6 +367,16 @@ class TakedownDrills {
         'Use your hip as a fulcrum',
         'Pull them over your hip',
         'Follow them down and secure position'
+      ],
+      descriptionPt: 'Um arremesso baseado no quadril que usa seu quadril como uma roda para arremessar o oponente.',
+      categoryPt: 'Quedas',
+      difficultyPt: 'Intermediário',
+      stepsPt: [
+        'Obtenha uma pegada no colarinho e gancho por baixo',
+        'Entre e vire seu quadril contra o dele',
+        'Use seu quadril como ponto de apoio',
+        'Puxe-o sobre seu quadril',
+        'Siga-o ao chão e garanta a posição'
       ],
     ),
   ];

@@ -1,0 +1,266 @@
+{
+  "@@locale": "en",
+  "appTitle": "BJJ Drills",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "appDescription": "BJJ Drills - Brazilian Jiu-Jitsu training companion app",
+  "@appDescription": {
+    "description": "The description of the application"
+  },
+  "welcomeTitle": "Welcome to BJJ Drills!",
+  "@welcomeTitle": {
+    "description": "Welcome message title"
+  },
+  "welcomeSubtitle": "Your Brazilian Jiu-Jitsu training companion",
+  "@welcomeSubtitle": {
+    "description": "Welcome message subtitle"
+  },
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "Hello world message"
+  },
+  "readyToStart": "Ready to start your BJJ journey?",
+  "@readyToStart": {
+    "description": "Ready to start message"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Get started button text"
+  },
+  "welcomeMessage": "Welcome to BJJ Drills! 🥋",
+  "@welcomeMessage": {
+    "description": "Welcome snackbar message"
+  },
+  "checkDrillsList": "Check out the Drills List tab! 🥋",
+  "@checkDrillsList": {
+    "description": "Check drills list message"
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Home tab label"
+  },
+  "drillsList": "Drills List",
+  "@drillsList": {
+    "description": "Drills list tab label"
+  },
+  "fastTraining": "Fast Training",
+  "@fastTraining": {
+    "description": "Fast training screen title"
+  },
+  "timerConfiguration": "Timer Configuration",
+  "@timerConfiguration": {
+    "description": "Timer configuration screen title"
+  },
+  "startFastTraining": "Start Fast Training",
+  "@startFastTraining": {
+    "description": "Start fast training button text"
+  },
+  "readyToStartTraining": "Ready to Start Training",
+  "@readyToStartTraining": {
+    "description": "Ready to start training message"
+  },
+  "tapStartToBegin": "Tap Start to begin your BJJ drill session",
+  "@tapStartToBegin": {
+    "description": "Tap start to begin message"
+  },
+  "drillsSelected": "{count} Drills Selected",
+  "@drillsSelected": {
+    "description": "Number of drills selected",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "drillsDone": "Drills Done",
+  "@drillsDone": {
+    "description": "Drills done label"
+  },
+  "nextIn": "Next in",
+  "@nextIn": {
+    "description": "Next in label"
+  },
+  "remaining": "Remaining",
+  "@remaining": {
+    "description": "Remaining label"
+  },
+  "round": "Round {roundNumber}",
+  "@round": {
+    "description": "Round number",
+    "placeholders": {
+      "roundNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "start": "Start",
+  "@start": {
+    "description": "Start button text"
+  },
+  "pause": "Pause",
+  "@pause": {
+    "description": "Pause button text"
+  },
+  "resume": "Resume",
+  "@resume": {
+    "description": "Resume button text"
+  },
+  "stop": "Stop",
+  "@stop": {
+    "description": "Stop button text"
+  },
+  "trainingInProgress": "Training in progress...",
+  "@trainingInProgress": {
+    "description": "Training in progress message"
+  },
+  "trainingPaused": "Training paused",
+  "@trainingPaused": {
+    "description": "Training paused message"
+  },
+  "interval": "Interval",
+  "@interval": {
+    "description": "Interval label"
+  },
+  "order": "Order",
+  "@order": {
+    "description": "Order label"
+  },
+  "repeat": "Repeat",
+  "@repeat": {
+    "description": "Repeat label"
+  },
+  "random": "Random",
+  "@random": {
+    "description": "Random order"
+  },
+  "sequential": "Sequential",
+  "@sequential": {
+    "description": "Sequential order"
+  },
+  "yes": "Yes",
+  "@yes": {
+    "description": "Yes"
+  },
+  "no": "No",
+  "@no": {
+    "description": "No"
+  },
+  "trainingComplete": "Training Complete!",
+  "@trainingComplete": {
+    "description": "Training complete dialog title"
+  },
+  "completedDrills": "You completed {count} drills!",
+  "@completedDrills": {
+    "description": "Completed drills message",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "completedRounds": "Completed {rounds} rounds",
+  "@completedRounds": {
+    "description": "Completed rounds message",
+    "placeholders": {
+      "rounds": {
+        "type": "int"
+      }
+    }
+  },
+  "greatJob": "Great job on your BJJ training session! 🥋",
+  "@greatJob": {
+    "description": "Great job message"
+  },
+  "finish": "Finish",
+  "@finish": {
+    "description": "Finish button text"
+  },
+  "beginner": "Beginner",
+  "@beginner": {
+    "description": "Beginner difficulty"
+  },
+  "intermediate": "Intermediate",
+  "@intermediate": {
+    "description": "Intermediate difficulty"
+  },
+  "advanced": "Advanced",
+  "@advanced": {
+    "description": "Advanced difficulty"
+  },
+  "all": "All",
+  "@all": {
+    "description": "All difficulty levels"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language label"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language"
+  },
+  "portuguese": "Português",
+  "@portuguese": {
+    "description": "Portuguese language"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings label"
+  },
+  
+  "bjjTakedownDrills": "BJJ Takedown Drills",
+  "filterByDifficulty": "Filter by Difficulty:",
+  "all": "All",
+  "beginner": "Beginner",
+  "intermediate": "Intermediate",
+  "advanced": "Advanced",
+  "takedownDrillsAvailable": "{count} takedown drills available",
+  "@takedownDrillsAvailable": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "selectDrillsForFastTraining": "Select Drills for Fast Training",
+  "clearAll": "Clear All",
+  "fastTrainingSetup": "Fast Training Setup",
+  "drillsSelected": "{count} drills selected",
+  "@drillsSelected": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "continueToTimerSetup": "Continue to Timer Setup",
+  "timerConfiguration": "Timer Configuration",
+  "timeInterval": "Time Interval",
+  "howLongBetweenEachDrill": "How long between each drill announcement",
+  "minutes": "Minutes:",
+  "seconds": "Seconds:",
+  "trainingOptions": "Training Options",
+  "customizeYourTrainingExperience": "Customize your training experience",
+  "randomOrder": "Random Order",
+  "announceDrillsInRandomOrder": "Announce drills in random order",
+  "repeatDrills": "Repeat Drills",
+  "allowDrillsToBeRepeated": "Allow drills to be repeated during training",
+  "selectedDrills": "Selected Drills",
+  "drillsThatWillBeAnnounced": "Drills that will be announced during training",
+  "andMoreDrills": "... and {count} more drills",
+  "@andMoreDrills": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "startFastTraining": "Start Fast Training",
+  "steps": "Steps:",
+  "startDrill": "Start Drill",
+  "favorite": "Favorite",
+  "startingDrill": "Starting {drillName} drill! 🥋",
+  "@startingDrill": {
+    "placeholders": {
+      "drillName": {}
+    }
+  },
+  "drillAddedToFavorites": "Drill added to favorites! ⭐",
+  "min": "min",
+  "totalTime": "Total Time"
+}

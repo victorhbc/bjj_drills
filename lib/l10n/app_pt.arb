@@ -1,0 +1,101 @@
+{
+  "@@locale": "pt",
+  "appTitle": "BJJ Drills",
+  "appDescription": "BJJ Drills - Aplicativo de treinamento de Jiu-Jitsu Brasileiro",
+  "welcomeTitle": "Bem-vindo ao BJJ Drills!",
+  "welcomeSubtitle": "Seu companheiro de treinamento de Jiu-Jitsu Brasileiro",
+  "helloWorld": "Olá Mundo!",
+  "readyToStart": "Pronto para começar sua jornada no BJJ?",
+  "getStarted": "Começar",
+  "welcomeMessage": "Bem-vindo ao BJJ Drills! 🥋",
+  "checkDrillsList": "Confira a aba Lista de Exercícios! 🥋",
+  "home": "Início",
+  "drillsList": "Lista de Exercícios",
+  "fastTraining": "Treino Rápido",
+  "timerConfiguration": "Configuração do Timer",
+  "startFastTraining": "Iniciar Treino Rápido",
+  "readyToStartTraining": "Pronto para Iniciar o Treino",
+  "tapStartToBegin": "Toque em Iniciar para começar sua sessão de exercícios de BJJ",
+  "drillsSelected": "{count} Exercícios Selecionados",
+  "drillsDone": "Exercícios Feitos",
+  "nextIn": "Próximo em",
+  "remaining": "Restantes",
+  "round": "Round {roundNumber}",
+  "start": "Iniciar",
+  "pause": "Pausar",
+  "resume": "Retomar",
+  "stop": "Parar",
+  "trainingInProgress": "Treino em andamento...",
+  "trainingPaused": "Treino pausado",
+  "interval": "Intervalo",
+  "order": "Ordem",
+  "repeat": "Repetir",
+  "random": "Aleatório",
+  "sequential": "Sequencial",
+  "yes": "Sim",
+  "no": "Não",
+  "trainingComplete": "Treino Concluído!",
+  "completedDrills": "Você completou {count} exercícios!",
+  "completedRounds": "Completou {rounds} rounds",
+  "greatJob": "Ótimo trabalho na sua sessão de treino de BJJ! 🥋",
+  "finish": "Finalizar",
+  "beginner": "Iniciante",
+  "intermediate": "Intermediário",
+  "advanced": "Avançado",
+  "all": "Todos",
+  "language": "Idioma",
+  "english": "English",
+  "portuguese": "Português",
+  "settings": "Configurações",
+  
+  "bjjTakedownDrills": "Exercícios de Queda do BJJ",
+  "filterByDifficulty": "Filtrar por Dificuldade:",
+  "takedownDrillsAvailable": "{count} exercícios de queda disponíveis",
+  "@takedownDrillsAvailable": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "selectDrillsForFastTraining": "Selecionar Exercícios para Treino Rápido",
+  "clearAll": "Limpar Todos",
+  "fastTrainingSetup": "Configuração do Treino Rápido",
+  "drillsSelected": "{count} exercícios selecionados",
+  "@drillsSelected": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "continueToTimerSetup": "Continuar para Configuração do Timer",
+  "timerConfiguration": "Configuração do Timer",
+  "timeInterval": "Intervalo de Tempo",
+  "howLongBetweenEachDrill": "Quanto tempo entre cada anúncio de exercício",
+  "minutes": "Minutos:",
+  "seconds": "Segundos:",
+  "trainingOptions": "Opções de Treino",
+  "customizeYourTrainingExperience": "Personalize sua experiência de treino",
+  "randomOrder": "Ordem Aleatória",
+  "announceDrillsInRandomOrder": "Anunciar exercícios em ordem aleatória",
+  "repeatDrills": "Repetir Exercícios",
+  "allowDrillsToBeRepeated": "Permitir que exercícios sejam repetidos durante o treino",
+  "selectedDrills": "Exercícios Selecionados",
+  "drillsThatWillBeAnnounced": "Exercícios que serão anunciados durante o treino",
+  "andMoreDrills": "... e mais {count} exercícios",
+  "@andMoreDrills": {
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "startFastTraining": "Iniciar Treino Rápido",
+  "steps": "Passos:",
+  "startDrill": "Iniciar Exercício",
+  "favorite": "Favorito",
+  "startingDrill": "Iniciando exercício {drillName}! 🥋",
+  "@startingDrill": {
+    "placeholders": {
+      "drillName": {}
+    }
+  },
+  "drillAddedToFavorites": "Exercício adicionado aos favoritos! ⭐",
+  "min": "min",
+  "totalTime": "Tempo Total"
+}
