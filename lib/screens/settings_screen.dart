@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../l10n/app_localizations.dart';
 import '../providers/language_provider.dart';
+import '../providers/theme_provider.dart';
 import '../services/tts_service.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -14,6 +15,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final TTSService _ttsService = TTSService();
   bool _ttsEnabled = true;
+  bool _ttsAvailable = false;
 
   @override
   void initState() {
@@ -25,6 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     await _ttsService.initialize();
     setState(() {
       _ttsEnabled = _ttsService.isEnabled;
+      _ttsAvailable = _ttsService.isAvailable;
     });
   }
 
@@ -44,7 +47,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 2,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,6 +95,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
             
             const SizedBox(height: 24),
             
+            // Theme Section
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.palette,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          'Theme',
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    _buildThemeOption(
+                      context,
+                      'Light',
+                      ThemeMode.light,
+                      Icons.light_mode,
+                    ),
+                    const SizedBox(height: 8),
+                    _buildThemeOption(
+                      context,
+                      'Dark',
+                      ThemeMode.dark,
+                      Icons.dark_mode,
+                    ),
+                    const SizedBox(height: 8),
+                    _buildThemeOption(
+                      context,
+                      'System',
+                      ThemeMode.system,
+                      Icons.settings_system_daydream,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            
+            const SizedBox(height: 24),
+            
             // TTS Settings Section
             Card(
               child: Padding(
@@ -119,6 +172,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       l10n.enableVoiceAnnouncements,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.grey[600],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // TTS Status indicator
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: _ttsAvailable 
+                            ? Colors.green.withValues(alpha: 0.1)
+                            : Colors.red.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: _ttsAvailable 
+                              ? Colors.green.withValues(alpha: 0.3)
+                              : Colors.red.withValues(alpha: 0.3),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            _ttsAvailable ? Icons.check_circle : Icons.error,
+                            color: _ttsAvailable ? Colors.green : Colors.red,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            _ttsAvailable 
+                                ? 'TTS is available on this device'
+                                : 'TTS is not available on this device',
+                            style: TextStyle(
+                              color: _ttsAvailable ? Colors.green : Colors.red,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -151,6 +240,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         }
                       },
                       activeThumbColor: Theme.of(context).colorScheme.primary,
+                    ),
+                    const SizedBox(height: 16),
+                    // Test TTS button
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        onPressed: _ttsAvailable && _ttsEnabled ? _testTTS : null,
+                        icon: const Icon(Icons.volume_up),
+                        label: const Text('Test Voice Announcement'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                          foregroundColor: Colors.white,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -202,6 +305,69 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildThemeOption(
+    BuildContext context,
+    String themeName,
+    ThemeMode themeMode,
+    IconData icon,
+  ) {
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        final isSelected = themeProvider.themeMode == themeMode;
+    
+        return InkWell(
+          onTap: () {
+            _changeTheme(context, themeMode);
+          },
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: isSelected 
+                  ? Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3)
+                  : Colors.transparent,
+              border: Border.all(
+                color: isSelected 
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.transparent,
+                width: 1,
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  color: isSelected 
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.grey[600],
+                  size: 20,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  themeName,
+                  style: TextStyle(
+                    color: isSelected 
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.grey[800],
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+                const Spacer(),
+                if (isSelected)
+                  Icon(
+                    Icons.check_circle,
+                    color: Theme.of(context).colorScheme.primary,
+                    size: 20,
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -284,5 +450,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
     );
+  }
+
+  void _changeTheme(BuildContext context, ThemeMode themeMode) {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    themeProvider.setThemeMode(themeMode);
+    
+    // Show a success message
+    String themeName;
+    switch (themeMode) {
+      case ThemeMode.light:
+        themeName = 'Light';
+        break;
+      case ThemeMode.dark:
+        themeName = 'Dark';
+        break;
+      case ThemeMode.system:
+        themeName = 'System';
+        break;
+    }
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Theme changed to $themeName'),
+        duration: const Duration(seconds: 2),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+      ),
+    );
+  }
+
+  Future<void> _testTTS() async {
+    try {
+      final success = await _ttsService.testTTS();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              success 
+                  ? 'TTS test successful! You should hear the announcement.'
+                  : 'TTS test failed. Check device settings.',
+            ),
+            duration: const Duration(seconds: 3),
+            backgroundColor: success 
+                ? Colors.green 
+                : Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('TTS test error: $e'),
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

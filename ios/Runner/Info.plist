@@ -45,5 +45,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses speech recognition to announce drill names during training.</string>
+	<key>NSSpeechSynthesisUsageDescription</key>
+	<string>This app uses text-to-speech to announce drill names during training.</string>
 </dict>
 </plist>
