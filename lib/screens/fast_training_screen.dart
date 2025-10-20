@@ -10,7 +10,7 @@ class FastTrainingScreen extends StatefulWidget {
   final int intervalSeconds;
   final bool randomOrder;
   final bool repeatDrills;
-
+  
   const FastTrainingScreen({
     super.key,
     required this.selectedDrills,

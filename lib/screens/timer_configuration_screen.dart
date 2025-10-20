@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../models/drill.dart';
 import 'fast_training_screen.dart';
 
@@ -15,13 +16,11 @@ class TimerConfigurationScreen extends StatefulWidget {
 }
 
 class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
-  int _intervalMinutes = 2;
-  int _intervalSeconds = 0;
+  int _intervalMinutes = 0;
+  int _intervalSeconds = 5;
   bool _randomOrder = true;
   bool _repeatDrills = true;
 
-  final List<int> _minuteOptions = [0, 1, 2, 3, 5, 10, 15, 20, 30];
-  final List<int> _secondOptions = [0,1 , 2, 5, 10, 15, 30, 45];
 
   @override
   Widget build(BuildContext context) {
@@ -120,62 +119,19 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
                   _SectionCard(
                     title: 'Time Interval',
                     subtitle: 'How long between each drill announcement',
-                    child: Column(
-                      children: [
-                        // Minutes selection
-                        Text(
-                          'Minutes:',
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Wrap(
-                          spacing: 8,
-                          children: _minuteOptions.map((minutes) {
-                            final isSelected = _intervalMinutes == minutes;
-                            return FilterChip(
-                              label: Text('$minutes'),
-                              selected: isSelected,
-                              onSelected: (selected) {
-                                setState(() {
-                                  _intervalMinutes = minutes;
-                                });
-                              },
-                              selectedColor: Theme.of(context).colorScheme.primaryContainer,
-                              checkmarkColor: Theme.of(context).colorScheme.primary,
-                            );
-                          }).toList(),
-                        ),
-                        
-                        const SizedBox(height: 16),
-                        
-                        // Seconds selection
-                        Text(
-                          'Seconds:',
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Wrap(
-                          spacing: 8,
-                          children: _secondOptions.map((seconds) {
-                            final isSelected = _intervalSeconds == seconds;
-                            return FilterChip(
-                              label: Text('$seconds'),
-                              selected: isSelected,
-                              onSelected: (selected) {
-                                setState(() {
-                                  _intervalSeconds = seconds;
-                                });
-                              },
-                              selectedColor: Theme.of(context).colorScheme.primaryContainer,
-                              checkmarkColor: Theme.of(context).colorScheme.primary,
-                            );
-                          }).toList(),
-                        ),
-                      ],
+                    child: _iPhoneTimePicker(
+                      minutes: _intervalMinutes,
+                      seconds: _intervalSeconds,
+                      onMinutesChanged: (minutes) {
+                        setState(() {
+                          _intervalMinutes = minutes;
+                        });
+                      },
+                      onSecondsChanged: (seconds) {
+                        setState(() {
+                          _intervalSeconds = seconds;
+                        });
+                      },
                     ),
                   ),
 
@@ -339,6 +295,208 @@ class _TimerConfigurationScreenState extends State<TimerConfigurationScreen> {
       default:
         return Colors.grey;
     }
+  }
+}
+
+class _iPhoneTimePicker extends StatefulWidget {
+  final int minutes;
+  final int seconds;
+  final ValueChanged<int> onMinutesChanged;
+  final ValueChanged<int> onSecondsChanged;
+
+  const _iPhoneTimePicker({
+    required this.minutes,
+    required this.seconds,
+    required this.onMinutesChanged,
+    required this.onSecondsChanged,
+  });
+
+  @override
+  State<_iPhoneTimePicker> createState() => _iPhoneTimePickerState();
+}
+
+class _iPhoneTimePickerState extends State<_iPhoneTimePicker> {
+  late FixedExtentScrollController _minutesController;
+  late FixedExtentScrollController _secondsController;
+
+  final List<int> _minutesList = List.generate(31, (index) => index); // 0-30 minutes
+  final List<int> _secondsList = List.generate(60, (index) => index); // 0-59 seconds
+
+  @override
+  void initState() {
+    super.initState();
+    _minutesController = FixedExtentScrollController(initialItem: widget.minutes);
+    _secondsController = FixedExtentScrollController(initialItem: widget.seconds);
+  }
+
+  @override
+  void dispose() {
+    _minutesController.dispose();
+    _secondsController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+        ),
+      ),
+      child: Row(
+        children: [
+          // Minutes picker
+          Expanded(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    'MIN',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      // Selection indicator
+                      Center(
+                        child: Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // ListWheelScrollView
+                      ListWheelScrollView.useDelegate(
+                        controller: _minutesController,
+                        itemExtent: 40,
+                        perspective: 0.005,
+                        diameterRatio: 1.2,
+                        physics: const FixedExtentScrollPhysics(),
+                        onSelectedItemChanged: (index) {
+                          widget.onMinutesChanged(_minutesList[index]);
+                        },
+                        childDelegate: ListWheelChildBuilderDelegate(
+                          builder: (context, index) {
+                            if (index >= _minutesList.length) return null;
+                            final value = _minutesList[index];
+                            final isSelected = value == widget.minutes;
+                            
+                            return Center(
+                              child: Text(
+                                value.toString().padLeft(2, '0'),
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  color: isSelected 
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.onSurface,
+                                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: _minutesList.length,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Separator
+          Container(
+            width: 1,
+            height: 120,
+            color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+          ),
+          
+          // Seconds picker
+          Expanded(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    'SEC',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      // Selection indicator
+                      Center(
+                        child: Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // ListWheelScrollView
+                      ListWheelScrollView.useDelegate(
+                        controller: _secondsController,
+                        itemExtent: 40,
+                        perspective: 0.005,
+                        diameterRatio: 1.2,
+                        physics: const FixedExtentScrollPhysics(),
+                        onSelectedItemChanged: (index) {
+                          widget.onSecondsChanged(_secondsList[index]);
+                        },
+                        childDelegate: ListWheelChildBuilderDelegate(
+                          builder: (context, index) {
+                            if (index >= _secondsList.length) return null;
+                            final value = _secondsList[index];
+                            final isSelected = value == widget.seconds;
+                            
+                            return Center(
+                              child: Text(
+                                value.toString().padLeft(2, '0'),
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  color: isSelected 
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.onSurface,
+                                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: _secondsList.length,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
